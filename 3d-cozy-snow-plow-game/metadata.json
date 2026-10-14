@@ -1,0 +1,8 @@
+{
+  "name": "3D Cozy Snow Plow Game",
+  "description": "A 3D spherical snow-plowing and boss-brawler game built with Three.js and procedural WebAudio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
