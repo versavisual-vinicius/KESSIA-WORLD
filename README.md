@@ -69,12 +69,25 @@ O núcleo matemático deve determinar se uma resposta está correta; animações
 
 ```text
 .
+├── game/                     # Protótipo jogável: Pequeno Mundo das Frações (EF04MA09)
 ├── 3d-cozy-snow-plow-game/   # Referência de HUD, feedback e progressão de jogo
 ├── pocket-world-terrarium/   # Referência de mundo 3D e interação com Three.js
 └── README.md                 # Visão e proposta pedagógica do repositório
 ```
 
 Para executar ou entender cada projeto de referência, consulte o README da respectiva pasta. Os comandos e requisitos podem diferir entre elas.
+
+## Executar o Protótipo
+
+```bash
+cd game
+pnpm install
+pnpm dev      # http://localhost:3000
+pnpm test     # testes do núcleo matemático
+```
+
+Organização em `game/src/`: `core/` (regras de fração, missões, feedback e progresso — fonte única de correção), `world/` (cena do terrário + `WorldBridge`, que só reage a resultados) e `ui/` (reta numérica acessível, painel de missão, opções de acessibilidade). Progresso salvo localmente no navegador; sem servidor.
+
 
 ## Critérios para o Primeiro Protótipo
 
