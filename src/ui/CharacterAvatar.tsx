@@ -32,6 +32,28 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({
     solis: 'bg-yellow-50 border-yellow-300',
   };
 
+  if (avatarId === 'kessia') {
+    const kessiaSrc =
+      mood === 'happy'
+        ? '/characters/kessia/kessia_celebrating.png'
+        : mood === 'hint'
+        ? '/characters/kessia/kessia_thinking.png'
+        : '/characters/kessia/avatar_square.png';
+
+    return (
+      <div
+        className={`${dims} rounded-2xl border-2 ${bgColors.kessia} flex items-center justify-center shrink-0 shadow-xs overflow-hidden relative bg-[#FAF6F0]`}
+        aria-hidden="true"
+      >
+        <img
+          src={kessiaSrc}
+          alt="Késsia"
+          className="w-full h-full object-cover object-top scale-105"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`${dims} rounded-2xl border-2 ${bgColors[avatarId]} flex items-center justify-center shrink-0 shadow-sm overflow-hidden relative`}
@@ -43,33 +65,6 @@ export const CharacterAvatar: React.FC<CharacterAvatarProps> = ({
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {avatarId === 'kessia' && (
-          <>
-            <ellipse cx="32" cy="21" rx="22" ry="6" fill="#34D399" />
-            <path d="M18 21C18 12 24 8 32 8C40 8 46 12 46 21H18Z" fill="#10B981" />
-            <path d="M40 12C45 7 52 9 50 15C48 19 42 17 40 12Z" fill="#6EE7B7" />
-            <circle cx="32" cy="36" r="14" fill="#FDE68A" />
-            <circle cx="23" cy="38" r="2.5" fill="#F9A8D4" opacity="0.6" />
-            <circle cx="41" cy="38" r="2.5" fill="#F9A8D4" opacity="0.6" />
-            {mood === 'happy' ? (
-              <>
-                <path d="M24 34C25 32 28 32 29 34" stroke="#44403C" strokeWidth="2.4" strokeLinecap="round" />
-                <path d="M35 34C36 32 39 32 40 34" stroke="#44403C" strokeWidth="2.4" strokeLinecap="round" />
-              </>
-            ) : (
-              <>
-                <circle cx="26.5" cy="34" r="2.2" fill="#44403C" />
-                <circle cx="37.5" cy="34" r="2.2" fill="#44403C" />
-              </>
-            )}
-            <path
-              d={mood === 'hint' ? 'M28 42C30 41 34 41 36 42' : 'M26 40C28 44 36 44 38 40'}
-              stroke="#44403C"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-            />
-          </>
-        )}
 
         {avatarId === 'lino' && (
           <>

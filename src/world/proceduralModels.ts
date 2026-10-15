@@ -238,7 +238,7 @@ export function createTerrariumIsland(
 }
 
 /**
- * Cria o Personagem Explorador 3D controlado pelo estudante
+ * Cria o Personagem Explorador 3D controlado pelo estudante (Guardiã Késsia)
  */
 export function createExplorerCharacter(shadowTex: THREE.CanvasTexture): {
   root: THREE.Group;
@@ -249,7 +249,7 @@ export function createExplorerCharacter(shadowTex: THREE.CanvasTexture): {
   root.add(bodyGroup);
 
   const shadowPlane = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.1, 1.1),
+    new THREE.PlaneGeometry(1.05, 1.05),
     new THREE.MeshBasicMaterial({
       map: shadowTex,
       transparent: true,
@@ -261,58 +261,56 @@ export function createExplorerCharacter(shadowTex: THREE.CanvasTexture): {
   shadowPlane.position.y = 0.02;
   root.add(shadowPlane);
 
-  const bootMat = new THREE.MeshStandardMaterial({ color: 0x3f2314, roughness: 0.7 });
-  const tunicMat = new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.45 });
-  const packMat = new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.55 });
-  const skinMat = new THREE.MeshStandardMaterial({ color: 0xfde68a, roughness: 0.5 });
-  const hatMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4 });
+  // Texturas de alta resolução da Guardiã Késsia
+  const textureLoader = new THREE.TextureLoader();
+  const frontTex = textureLoader.load('/characters/kessia/body_front.png');
+  frontTex.colorSpace = THREE.SRGBColorSpace;
 
-  const leftBoot = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.18, 0.24), bootMat);
-  leftBoot.position.set(-0.11, 0.09, 0.02);
-  leftBoot.castShadow = true;
-  bodyGroup.add(leftBoot);
+  const backTex = textureLoader.load('/characters/kessia/body_back.png');
+  backTex.colorSpace = THREE.SRGBColorSpace;
 
-  const rightBoot = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.18, 0.24), bootMat);
-  rightBoot.position.set(0.11, 0.09, 0.02);
-  rightBoot.castShadow = true;
-  bodyGroup.add(rightBoot);
+  // Plano Frontal (Vista dianteira com casaco explorer e tranças)
+  const frontMat = new THREE.MeshStandardMaterial({
+    map: frontTex,
+    transparent: true,
+    alphaTest: 0.06,
+    roughness: 0.55,
+    metalness: 0.05,
+    side: THREE.FrontSide,
+  });
+  const frontPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 1.35), frontMat);
+  frontPlane.position.set(0, 0.675, 0.015);
+  frontPlane.castShadow = true;
+  bodyGroup.add(frontPlane);
 
-  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.26, 0.48, 16), tunicMat);
-  torso.position.y = 0.42;
-  torso.castShadow = true;
-  bodyGroup.add(torso);
+  // Plano Traseiro (Vista traseira com mochila explorer e dreadlocks)
+  const backMat = new THREE.MeshStandardMaterial({
+    map: backTex,
+    transparent: true,
+    alphaTest: 0.06,
+    roughness: 0.55,
+    metalness: 0.05,
+    side: THREE.FrontSide,
+  });
+  const backPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 1.35), backMat);
+  backPlane.rotation.y = Math.PI;
+  backPlane.position.set(0, 0.675, -0.015);
+  backPlane.castShadow = true;
+  bodyGroup.add(backPlane);
 
-  const backpack = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.34, 0.18), packMat);
-  backpack.position.set(0, 0.44, -0.2);
-  backpack.castShadow = true;
-  bodyGroup.add(backpack);
-
-  const leftArm = new THREE.Mesh(new THREE.CapsuleGeometry(0.06, 0.22, 8, 8), tunicMat);
-  leftArm.position.set(-0.27, 0.44, 0);
-  leftArm.rotation.z = 0.2;
-  leftArm.castShadow = true;
-  bodyGroup.add(leftArm);
-
-  const rightArm = new THREE.Mesh(new THREE.CapsuleGeometry(0.06, 0.22, 8, 8), tunicMat);
-  rightArm.position.set(0.27, 0.44, 0);
-  rightArm.rotation.z = -0.2;
-  rightArm.castShadow = true;
-  bodyGroup.add(rightArm);
-
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.21, 20, 20), skinMat);
-  head.position.y = 0.82;
-  head.castShadow = true;
-  bodyGroup.add(head);
-
-  const hatBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.04, 24), hatMat);
-  hatBrim.position.y = 0.98;
-  hatBrim.castShadow = true;
-  bodyGroup.add(hatBrim);
-
-  const hatCrown = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 0.18, 20), hatMat);
-  hatCrown.position.y = 1.08;
-  hatCrown.castShadow = true;
-  bodyGroup.add(hatCrown);
+  // Colisor de volume interno para projeção suave de sombras 3D
+  const coreVolume = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.18, 0.22, 1.1, 12),
+    new THREE.MeshStandardMaterial({
+      color: 0x10b981,
+      roughness: 0.6,
+      transparent: true,
+      opacity: 0.0,
+    })
+  );
+  coreVolume.position.y = 0.6;
+  coreVolume.castShadow = true;
+  bodyGroup.add(coreVolume);
 
   return { root, bodyGroup };
 }
@@ -359,6 +357,37 @@ export function createGuardianNPCGroup(
     emissiveIntensity: 0.55,
     roughness: 0.2,
   });
+
+  if (avatarId === 'kessia') {
+    const textureLoader = new THREE.TextureLoader();
+    const frontTex = textureLoader.load('/characters/kessia/body_front.png');
+    frontTex.colorSpace = THREE.SRGBColorSpace;
+
+    const kessiaMat = new THREE.MeshStandardMaterial({
+      map: frontTex,
+      transparent: true,
+      alphaTest: 0.06,
+      roughness: 0.5,
+      metalness: 0.05,
+      side: THREE.DoubleSide,
+    });
+
+    const kessiaPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 1.35), kessiaMat);
+    kessiaPlane.position.set(0, 0.675, 0.02);
+    kessiaPlane.castShadow = true;
+    npcGroup.add(kessiaPlane);
+
+    // Braço de aceno animado no loop Three.js
+    const waveArm = new THREE.Mesh(
+      new THREE.CapsuleGeometry(0.045, 0.2, 6, 8),
+      new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.4 })
+    );
+    waveArm.position.set(0.34, 0.72, 0.06);
+    waveArm.rotation.z = -0.55;
+    npcGroup.add(waveArm);
+
+    return { npcGroup, waveArm };
+  }
 
   // Corpo principal
   const body = new THREE.Mesh(

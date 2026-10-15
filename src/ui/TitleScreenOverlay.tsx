@@ -73,9 +73,23 @@ export const TitleScreenOverlay: React.FC<TitleScreenOverlayProps> = ({
       </div>
 
       {/* Card Central Clean Girl com Exemplo Visual */}
-      <div className="my-auto mx-auto max-w-md w-full text-center p-6 sm:p-7 rounded-3xl bg-[#FFFDF9]/95 border border-stone-200/90 shadow-[0_20px_50px_rgba(120,113,108,0.16)] pointer-events-auto space-y-4">
+      <div className="my-auto mx-auto max-w-md w-full text-center p-6 sm:p-7 rounded-3xl bg-[#FFFDF9]/95 border border-stone-200/90 shadow-[0_20px_50px_rgba(120,113,108,0.16)] pointer-events-auto space-y-3.5">
+        {/* Retrato Oficial da Guardiã Késsia */}
+        <div className="flex flex-col items-center justify-center -mt-1">
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-emerald-400 shadow-md overflow-hidden bg-gradient-to-b from-emerald-100 to-amber-50">
+            <img
+              src="/characters/kessia/portrait.png"
+              alt="Késsia - Exploradora das Frações"
+              className="w-full h-full object-cover object-top scale-110"
+            />
+          </div>
+          <span className="mt-1.5 px-3 py-0.5 rounded-full bg-emerald-500 text-white font-bold text-[11px] shadow-xs tracking-wide">
+            Guardiã Késsia
+          </span>
+        </div>
+
         {/* Exemplos Visuais de Frações Unitárias */}
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center gap-2.5">
           {[
             { den: 2, color: '#10b981' },
             { den: 3, color: '#f43f5e' },
