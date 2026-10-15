@@ -77,6 +77,30 @@ export const EducatorModal: React.FC<EducatorModalProps> = ({
 
         {/* Corpo rolável */}
         <div className="p-5 sm:p-6 overflow-y-auto space-y-5">
+          {/* Barra de Progresso Geral BNCC */}
+          <div className="p-4 rounded-2xl bg-[#FAF6F0] border border-stone-200/80 space-y-2">
+            <div className="flex items-center justify-between text-xs font-bold">
+              <span className="text-stone-700">Progresso Geral na Trilha (BNCC EF04MA09)</span>
+              <span className="font-mono-num text-emerald-700">
+                {Math.round((progress.completedMissionIds.length / MISSIONS.length) * 100)}%
+              </span>
+            </div>
+            <div
+              className="w-full h-3 rounded-full bg-stone-200 overflow-hidden"
+              role="progressbar"
+              aria-valuenow={progress.completedMissionIds.length}
+              aria-valuemin={0}
+              aria-valuemax={MISSIONS.length}
+            >
+              <div
+                className="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-300"
+                style={{
+                  width: `${(progress.completedMissionIds.length / MISSIONS.length) * 100}%`,
+                }}
+              />
+            </div>
+          </div>
+
           {/* Resumo Quantitativo */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="p-3.5 rounded-2xl bg-[#FAF6F0] border border-stone-200/80">

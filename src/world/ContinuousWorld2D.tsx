@@ -29,14 +29,10 @@ interface ContinuousWorld2DProps {
   onUpdateProjections: (markers: ProjectedStationMarker[]) => void;
 }
 
-// Mapeamento pedagógico de cada missão ao longo da reta [0, 1] no percurso contínuo
-const MISSION_PATH_POSITIONS: Record<string, number> = {
-  'mission-eighth': 0.125, // 1/8
-  'mission-sixth': 0.166,  // 1/6
-  'mission-fourth': 0.25,  // 1/4
-  'mission-third': 0.333,  // 1/3
-  'mission-half': 0.5,     // 1/2
-};
+// Função canônica para obter a fração exata de cada missão no percurso contínuo [0, 1]
+export function getMissionPathFraction(targetDenominator: number): number {
+  return 1 / targetDenominator;
+}
 
 const WORLD_WIDTH = 2600; // Largura total do percurso contínuo de 0 a 1 em pixels
 
@@ -82,9 +78,12 @@ export const ContinuousWorld2D: React.FC<ContinuousWorld2DProps> = ({
 
   // Alinha o jogador à estação ativa caso selecionada externamente
   useEffect(() => {
-    const pos = MISSION_PATH_POSITIONS[activeMissionId];
-    if (pos !== undefined && Math.abs(playerPathProgress - pos) > 0.05) {
-      setTargetPathProgress(pos);
+    const targetMission = MISSIONS.find((m) => m.id === activeMissionId);
+    if (targetMission) {
+      const pos = getMissionPathFraction(targetMission.targetDenominator);
+      if (Math.abs(playerPathProgress - pos) > 0.05) {
+        setTargetPathProgress(pos);
+      }
     }
   }, [activeMissionId]);
 
@@ -138,13 +137,11 @@ export const ContinuousWorld2D: React.FC<ContinuousWorld2DProps> = ({
     let minDistance = 0.08; // Raio de proximidade
 
     MISSIONS.forEach((m) => {
-      const pos = MISSION_PATH_POSITIONS[m.id];
-      if (pos !== undefined) {
-        const dist = Math.abs(playerPathProgress - pos);
-        if (dist < minDistance) {
-          closestId = m.id;
-          minDistance = dist;
-        }
+      const pos = getMissionPathFraction(m.targetDenominator);
+      const dist = Math.abs(playerPathProgress - pos);
+      if (dist < minDistance) {
+        closestId = m.id;
+        minDistance = dist;
       }
     });
 
@@ -309,8 +306,7 @@ export const ContinuousWorld2D: React.FC<ContinuousWorld2DProps> = ({
 
             {/* ELEMENTOS DECORATIVOS E ESTAÇÕES DE MISSÃO NA TRILHA */}
             {MISSIONS.map((m) => {
-              const posFraction = MISSION_PATH_POSITIONS[m.id];
-              if (posFraction === undefined) return null;
+              const posFraction = getMissionPathFraction(m.targetDenominator);
               const percent = posFraction * 100;
               const isCompleted = completedMissionIds.includes(m.id);
               const isActive = m.id === activeMissionId;
@@ -356,7 +352,7 @@ export const ContinuousWorld2D: React.FC<ContinuousWorld2DProps> = ({
             <div
               className="absolute -top-26 -translate-x-1/2 flex flex-col items-center pointer-events-none transition-all duration-75 z-30"
               style={{
-                left: `${playerPixelX}px`,
+                left: `calc(1.5rem + ${playerPathProgress * 100}% * (100% - 3rem) / 100)`,
                 transform: `translateX(-50%) ${isFacingRight ? 'scaleX(1)' : 'scaleX(-1)'}`,
               }}
             >
