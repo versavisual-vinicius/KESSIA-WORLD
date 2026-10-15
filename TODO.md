@@ -8,8 +8,10 @@
 - [x] Otimização de WebGL: desabilitação de shader debug e ativação de `KHR_parallel_shader_compile`.
 - [x] `AGENTS.md` canônico criado no workspace para engenharia de contexto persistente.
 
+- [x] Otimização de chunking no Vite/Rolldown: `vendor-react` (210kB), `vendor-motion` (121kB), `vendor-icons` (12kB), `vendor-three` lazy (575kB) e bundle principal reduzido de 404kB para 72kB.
+
 ## Próximos Passos & Melhorias
-- [ ] Otimização de chunking no Vite/Rolldown para isolar pacotes `three` e `lucide-react` abaixo de 500kB.
 - [ ] Adicionar testes unitários para a lógica pura em `src/core/fractions.ts` e `src/core/storage.ts`.
 - [ ] Avaliar acessibilidade de teclado e leitor de tela (ARIA roles) no slider da reta numérica.
 - [ ] PWA offline support e manifest para instalação direta em tablets escolares.
+
