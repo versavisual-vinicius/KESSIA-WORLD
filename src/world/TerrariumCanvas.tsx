@@ -277,6 +277,15 @@ export const TerrariumCanvas: React.FC<TerrariumCanvasProps> = ({
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.shadowMap.enabled = !isHeadless;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    // Desativa validação síncrona de shaders (elimina ~957ms de bloqueio da thread principal com getProgramInfoLog)
+    renderer.debug.checkShaderErrors = false;
+
+    // Ativa compilação paralela assíncrona na GPU (extensão KHR_parallel_shader_compile)
+    const gl = renderer.getContext();
+    if (gl && typeof gl.getExtension === 'function') {
+      gl.getExtension('KHR_parallel_shader_compile');
+    }
+
     container.appendChild(renderer.domElement);
 
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -426,7 +435,25 @@ export const TerrariumCanvas: React.FC<TerrariumCanvasProps> = ({
       active: false,
     };
 
-    renderer.compile(scene, camera);
+    // Compilação assíncrona/não-bloqueante de shaders e materiais para priorizar FCP e LCP
+    let idleCompileId: number | null = null;
+    let timeoutCompileId: ReturnType<typeof setTimeout> | null = null;
+    let isDisposed = false;
+
+    const runAsyncCompile = () => {
+      if (isDisposed) return;
+      if ('compileAsync' in renderer && typeof (renderer as any).compileAsync === 'function') {
+        (renderer as any).compileAsync(scene, camera).catch(() => {});
+      } else {
+        renderer.compile(scene, camera);
+      }
+    };
+
+    if (typeof window.requestIdleCallback === 'function') {
+      idleCompileId = window.requestIdleCallback(runAsyncCompile, { timeout: 600 });
+    } else {
+      timeoutCompileId = setTimeout(runAsyncCompile, 60);
+    }
 
     // Teclado
     const heldKeys = new Set<string>();
@@ -843,6 +870,13 @@ export const TerrariumCanvas: React.FC<TerrariumCanvasProps> = ({
     animFrameId = requestAnimationFrame(animate);
 
     return () => {
+      isDisposed = true;
+      if (idleCompileId !== null && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(idleCompileId);
+      }
+      if (timeoutCompileId !== null) {
+        clearTimeout(timeoutCompileId);
+      }
       cancelAnimationFrame(animFrameId);
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('keyup', onKeyUp);
