@@ -5,6 +5,9 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    test: {
+      environment: 'happy-dom',
+    },
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

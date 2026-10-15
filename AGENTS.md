@@ -61,7 +61,9 @@ src/
    - Toda malha (`Mesh`), geometria (`BufferGeometry`) e material (`Material`) criados proceduralmente devem ser descartados (`dispose()`) no desmonte do componente.
    - Cancelar explicitamente o loop `requestAnimationFrame` em `useEffect` de limpeza.
 
-3. **Interação Móvel e Responsividade**:
+3. **Design 100% Tátil (Touch-First Mobile Game)**:
+   - Toda a interação primária é orientada a toque e polegares: tap-to-move no solo 3D, D-pad de polegar, rotação por arraste gestual, fatiamento direto por toque e scrubbing contínuo do marcador na reta numérica.
+   - O suporte a teclado (WASD / setas) opera exclusivamente como camada secundária invisível em background para tecnologias assistivas (acessibilidade) e testes automatizados, sem exibir atalhos de desktop ou exigir digitação.
    - Suporte mandatório a safe areas (`var(--sat)`, `var(--sab)`).
    - `touch-action: manipulation` e prevenção de scroll/bounce indesejado (`overflow: hidden`).
    - Alvos de toque mínimos de 44×44px em botões e manipuladores da reta numérica.

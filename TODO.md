@@ -9,9 +9,10 @@
 - [x] `AGENTS.md` canônico criado no workspace para engenharia de contexto persistente.
 
 - [x] Otimização de chunking no Vite/Rolldown: `vendor-react` (210kB), `vendor-motion` (121kB), `vendor-icons` (12kB), `vendor-three` lazy (575kB) e bundle principal reduzido de 404kB para 72kB.
+- [x] Testes unitários para a lógica pura em `src/core/fractions.ts` e `src/core/storage.ts` (22 testes cobrindo aritmética BNCC EF04MA09, persistência e diagnósticos do educador via Vitest).
+
+- [x] Experiência 100% tátil (touch-first) para mobile: D-pad ergonômico de polegar (44px), tap-to-move no solo 3D, fatias com toque suave e scrubbing contínuo do slider com `setPointerCapture`; teclado restrito a fallback secundário invisível em background.
 
 ## Próximos Passos & Melhorias
-- [ ] Adicionar testes unitários para a lógica pura em `src/core/fractions.ts` e `src/core/storage.ts`.
-- [ ] Avaliar acessibilidade de teclado e leitor de tela (ARIA roles) no slider da reta numérica.
-- [ ] PWA offline support e manifest para instalação direta em tablets escolares.
+- [ ] PWA offline support e manifest para instalação direta em tablets e smartphones escolares.
 
