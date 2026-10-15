@@ -11,7 +11,8 @@
 - [x] Otimização de chunking no Vite/Rolldown: `vendor-react` (210kB), `vendor-motion` (121kB), `vendor-icons` (12kB), `vendor-three` lazy (575kB) e bundle principal reduzido de 404kB para 72kB.
 - [x] Testes unitários para a lógica pura em `src/core/fractions.ts` e `src/core/storage.ts` (22 testes cobrindo aritmética BNCC EF04MA09, persistência e diagnósticos do educador via Vitest).
 
-- [x] Experiência 100% tátil (touch-first) para mobile: D-pad ergonômico de polegar (44px), tap-to-move no solo 3D, fatias com toque suave e scrubbing contínuo do slider com `setPointerCapture`; teclado restrito a fallback secundário invisível em background.
+- [x] Experiência 100% tátil (touch-first) para mobile: D-pad ergonômico de polegar (44px), tap-to-move no solo, fatias com toque suave e scrubbing contínuo do slider com `setPointerCapture`; teclado restrito a fallback secundário invisível em background.
+- [x] Transição para Mundo Contínuo 2D (`ContinuousWorld2D.tsx`): Kessia integrada organicamente ao cenário botânico; o chão do mundo é a própria reta numérica graduada de 0 a 1; ponte em 1/2 sobre o riacho; eliminação de 575kB de WebGL/Three.js.
 
 ## Próximos Passos & Melhorias
 - [ ] PWA offline support e manifest para instalação direta em tablets e smartphones escolares.

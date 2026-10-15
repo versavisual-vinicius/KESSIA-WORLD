@@ -100,8 +100,8 @@ export const TOUR_SCRIPT: Record<
 > = {
   1: {
     badge: 'Tour · 1/3',
-    title: 'Gire o Mundo 3D',
-    text: 'Arraste a tela para girar a câmera e toque na grama para caminhar.',
+    title: 'Explore o Caminho 2D',
+    text: 'Deslize a tela horizontalmente e toque na trilha para caminhar de 0 a 1.',
     ctaLabel: 'Próximo ▶',
   },
   2: {

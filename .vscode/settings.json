@@ -1,3 +1,4 @@
 {
-  "workbench.startupEditor": "readme"
+  "npm.packageManager": "pnpm",
+  "workbench.startupEditor": "none"
 }

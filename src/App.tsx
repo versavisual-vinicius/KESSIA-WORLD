@@ -58,9 +58,7 @@ import {
   WorldSpeechBubbles,
 } from './ui/WorldSpeechBubbles';
 
-const TerrariumCanvas = React.lazy(() =>
-  import('./world/TerrariumCanvas').then((mod) => ({ default: mod.TerrariumCanvas }))
-);
+import { ContinuousWorld2D } from './world/ContinuousWorld2D';
 
 export default function App() {
   const [progress, setProgress] = useState<PlayerProgressState>(() =>
@@ -370,27 +368,27 @@ export default function App() {
         highContrast ? 'bg-white text-stone-950' : 'bg-[#FAF8F5] text-stone-800'
       }`}
     >
-      {/* 1. MUNDO 3D INTERATIVO (100vw x 100vh com carregamento assíncrono para FCP/LCP instantâneo) */}
-      <React.Suspense fallback={<div className="fixed inset-0 bg-[#FAF8F5] z-0 pointer-events-none" />}>
-        <TerrariumCanvas
-          activeMissionId={activeMission.id}
-          completedMissionIds={progress.completedMissionIds}
-          placedDecorations={progress.placedDecorations}
-          selectedCreativeReward={buildModeReward || selectedCreativeReward}
-          isBuildMode={Boolean(buildModeReward)}
-          isCreativeMode={Boolean(buildModeReward) || (dockTab === 'creative' && isDialogueOpen)}
-          isDialogueOpen={isDialogueOpen}
-          tourStep={tourStep}
-          mobileMoveDir={mobileMoveDir}
-          reducedStimuli={reducedStimuli}
-          highContrast={highContrast}
-          celebrationTrigger={celebrationTrigger}
-          onSelectMission={handleSelectMission}
-          onPlaceDecoration={handlePlaceDecoration}
-          onNearbyStationChange={setNearbyMissionId}
-          onUpdateProjections={setProjectedMarkers}
-        />
-      </React.Suspense>
+      {/* 1. MUNDO CONTÍNUO 2D (Caminho Botânico de 0 a 1 com Kessia Integrada) */}
+      <ContinuousWorld2D
+        activeMissionId={activeMission.id}
+        completedMissionIds={progress.completedMissionIds}
+        placedDecorations={progress.placedDecorations}
+        selectedCreativeReward={buildModeReward || selectedCreativeReward}
+        isBuildMode={Boolean(buildModeReward)}
+        isCreativeMode={Boolean(buildModeReward) || (dockTab === 'creative' && isDialogueOpen)}
+        isDialogueOpen={isDialogueOpen}
+        tourStep={tourStep}
+        mobileMoveDir={mobileMoveDir}
+        reducedStimuli={reducedStimuli}
+        highContrast={highContrast}
+        celebrationTrigger={celebrationTrigger}
+        chosenDenominator={chosenDenominator}
+        chosenStep={chosenStep}
+        onSelectMission={handleSelectMission}
+        onPlaceDecoration={handlePlaceDecoration}
+        onNearbyStationChange={setNearbyMissionId}
+        onUpdateProjections={setProjectedMarkers}
+      />
 
       {/* 1.1 OVERLAY DE CONSTRUÇÃO DE RECOMPENSA (Ao Acertar Questão) */}
       {screenMode === 'playing' && buildModeReward && (
