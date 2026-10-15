@@ -442,7 +442,7 @@ export default function App() {
       {screenMode !== 'title' && (
         <header className="fixed top-0 left-0 right-0 z-20 pt-[max(0.4rem,env(safe-area-inset-top))] px-2 pb-1 flex items-center justify-between gap-1.5 pointer-events-none">
           {/* Seletor Visual de Estações (Carrossel Horizontal com Toque Suave) */}
-          <div className="px-1.5 py-1 rounded-full bg-[#FFFDF9]/94 border border-stone-200/90 shadow-xs flex items-center gap-1 pointer-events-auto overflow-x-auto no-scrollbar max-w-[calc(100vw-115px)] sm:max-w-none">
+          <div className="px-1.5 py-1 rounded-full bg-[#FFFDF9] border border-stone-300 shadow-xs flex items-center gap-1.5 pointer-events-auto overflow-x-auto no-scrollbar max-w-[calc(100vw-130px)] sm:max-w-none">
             {MISSIONS.map((m) => {
               const isDone = progress.completedMissionIds.includes(m.id);
               const isCurrent = m.id === activeMission.id;
@@ -451,20 +451,20 @@ export default function App() {
                   key={m.id}
                   type="button"
                   onClick={() => handleSelectMission(m.id)}
-                  className={`min-h-[34px] px-2.5 py-1 rounded-full font-mono-num text-[11px] sm:text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 touch-manipulation ${
+                  className={`min-h-[44px] sm:min-h-[48px] px-3.5 py-1.5 rounded-full font-mono-num text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 shrink-0 touch-manipulation ${
                     isCurrent
-                      ? 'bg-emerald-500 text-white shadow-xs'
+                      ? 'bg-emerald-800 text-white shadow-xs'
                       : isDone
-                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                      : 'bg-[#FAF6F0] text-stone-600 hover:bg-stone-100'
+                      ? 'bg-emerald-50 text-emerald-950 border border-emerald-400 font-extrabold'
+                      : 'bg-[#FAF6F0] text-stone-900 border border-stone-300 hover:bg-stone-100'
                   }`}
                   title={`${m.characterName}: 1/${m.targetDenominator}`}
                 >
                   <MiniFractionPie
                     denominator={m.targetDenominator}
                     numerator={1}
-                    color={isCurrent ? '#10b981' : m.accentColor}
-                    size={18}
+                    color={isCurrent ? '#ffffff' : m.accentColor}
+                    size={20}
                   />
                   <span>1/{m.targetDenominator}</span>
                 </button>
@@ -472,49 +472,49 @@ export default function App() {
             })}
           </div>
 
-          {/* Ações Rápidas Compactas */}
-          <div className="flex items-center gap-1 pointer-events-auto">
+          {/* Ações Rápidas Compactas com Alvos de Toque >= 44px */}
+          <div className="flex items-center gap-1.5 pointer-events-auto">
             <button
               type="button"
               onClick={handleStartTourManually}
-              className={`w-8.5 h-8.5 sm:w-auto min-h-[34px] sm:px-3 sm:py-1.5 rounded-full border text-xs font-bold flex items-center justify-center gap-1 shadow-xs transition-colors touch-manipulation ${
+              className={`min-h-[44px] sm:min-h-[48px] px-3 sm:px-3.5 py-2 rounded-full border text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 shadow-xs transition-colors touch-manipulation ${
                 tourStep > 0
-                  ? 'bg-rose-400 border-rose-400 text-white'
-                  : 'bg-[#FFFDF9]/94 hover:bg-white border-stone-200 text-stone-700'
+                  ? 'bg-rose-800 border-rose-900 text-white'
+                  : 'bg-[#FFFDF9] hover:bg-white border-stone-300 text-stone-900'
               }`}
               title="Ver Tour Guiado"
               aria-label="Abrir Tour Guiado"
             >
-              <Compass className="w-3.5 h-3.5 text-rose-500" />
+              <Compass className="w-4 h-4 text-rose-700" />
               <span className="hidden sm:inline">Tour</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleToggleAccessibility('voiceEnabled')}
-              className={`w-8.5 h-8.5 min-h-[34px] p-1.5 rounded-full border flex items-center justify-center shadow-xs transition-colors touch-manipulation ${
+              className={`w-11 h-11 sm:w-12 sm:h-12 min-h-[44px] min-w-[44px] sm:min-h-[48px] sm:min-w-[48px] p-2 rounded-full border flex items-center justify-center shadow-xs transition-colors touch-manipulation ${
                 progress.accessibility.voiceEnabled
-                  ? 'bg-[#FFFDF9]/94 border-emerald-300 text-emerald-600'
-                  : 'bg-[#FFFDF9]/94 border-stone-200 text-stone-400'
+                  ? 'bg-[#FFFDF9] border-emerald-500 text-emerald-800'
+                  : 'bg-[#FFFDF9] border-stone-300 text-stone-700'
               }`}
               title="Ligar/Desligar Voz"
               aria-label="Alternar narração por voz"
             >
               {progress.accessibility.voiceEnabled ? (
-                <Volume2 className="w-3.5 h-3.5" />
+                <Volume2 className="w-4 h-4" />
               ) : (
-                <VolumeX className="w-3.5 h-3.5" />
+                <VolumeX className="w-4 h-4" />
               )}
             </button>
 
             <button
               type="button"
               onClick={() => setScreenMode('educator')}
-              className="w-8.5 h-8.5 sm:w-auto min-h-[34px] sm:px-3 sm:py-1.5 rounded-full bg-[#FFFDF9]/94 hover:bg-white border border-stone-200 text-xs font-semibold text-stone-700 flex items-center justify-center gap-1 shadow-xs transition-colors touch-manipulation"
+              className="min-h-[44px] min-w-[44px] sm:min-h-[48px] px-3 sm:px-3.5 py-2 rounded-full bg-[#FFFDF9] hover:bg-white border border-stone-300 text-xs sm:text-sm font-bold text-stone-900 flex items-center justify-center gap-1.5 shadow-xs transition-colors touch-manipulation"
               title="Painel do Educador"
               aria-label="Abrir Painel do Educador"
             >
-              <BookOpen className="w-3.5 h-3.5 text-rose-400" />
+              <BookOpen className="w-4 h-4 text-emerald-800" />
               <span className="hidden sm:inline">Educador</span>
             </button>
           </div>
@@ -628,8 +628,8 @@ export default function App() {
             }`}
           >
             {/* Barra de Abas Enxuta + Botão Responder Integrado para 360px */}
-            <div className="flex items-center justify-between gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 border-b border-stone-200/80 bg-[#FAF6F0]/80">
-              <div className="flex items-center gap-1 overflow-x-auto no-scrollbar" role="tablist">
+            <div className="flex items-center justify-between gap-1.5 px-2.5 sm:px-4 py-2 border-b border-stone-300 bg-[#FAF6F0]">
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar" role="tablist">
                 <button
                   type="button"
                   role="tab"
@@ -638,13 +638,13 @@ export default function App() {
                     soundController.triggerHaptic('light');
                     setDockTab('mission');
                   }}
-                  className={`min-h-[34px] px-2.5 sm:px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 transition-colors shrink-0 touch-manipulation ${
+                  className={`min-h-[44px] sm:min-h-[48px] px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors shrink-0 touch-manipulation ${
                     dockTab === 'mission'
-                      ? 'bg-emerald-500 text-white shadow-2xs'
-                      : 'text-stone-600 hover:bg-stone-200/60'
+                      ? 'bg-emerald-800 text-white shadow-2xs'
+                      : 'text-stone-900 hover:bg-stone-200/80'
                   }`}
                 >
-                  <MessageCircle className="w-3.5 h-3.5" />
+                  <MessageCircle className="w-4 h-4" />
                   <span>Reta 1/{activeMission.targetDenominator}</span>
                 </button>
 
@@ -656,13 +656,13 @@ export default function App() {
                     soundController.triggerHaptic('light');
                     setDockTab('review');
                   }}
-                  className={`min-h-[34px] px-2.5 sm:px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 transition-colors shrink-0 touch-manipulation ${
+                  className={`min-h-[44px] sm:min-h-[48px] px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors shrink-0 touch-manipulation ${
                     dockTab === 'review'
-                      ? 'bg-rose-400 text-white shadow-2xs'
-                      : 'text-stone-600 hover:bg-stone-200/60'
+                      ? 'bg-rose-800 text-white shadow-2xs'
+                      : 'text-stone-900 hover:bg-stone-200/80'
                   }`}
                 >
-                  <Sparkles className="w-3.5 h-3.5" />
+                  <Sparkles className="w-4 h-4" />
                   <span>Comparar</span>
                 </button>
 
@@ -674,13 +674,13 @@ export default function App() {
                     soundController.triggerHaptic('light');
                     setDockTab('creative');
                   }}
-                  className={`min-h-[34px] px-2.5 sm:px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 transition-colors shrink-0 touch-manipulation ${
+                  className={`min-h-[44px] sm:min-h-[48px] px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors shrink-0 touch-manipulation ${
                     dockTab === 'creative'
-                      ? 'bg-amber-400 text-stone-950 shadow-2xs'
-                      : 'text-stone-600 hover:bg-stone-200/60'
+                      ? 'bg-amber-800 text-white shadow-2xs'
+                      : 'text-stone-900 hover:bg-stone-200/80'
                   }`}
                 >
-                  <Palette className="w-3.5 h-3.5" />
+                  <Palette className="w-4 h-4" />
                   <span>Decorar</span>
                 </button>
 
@@ -692,13 +692,14 @@ export default function App() {
                     soundController.triggerHaptic('light');
                     setDockTab('accessibility');
                   }}
-                  className={`min-h-[34px] px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1 transition-colors shrink-0 touch-manipulation ${
+                  className={`min-h-[44px] sm:min-h-[48px] px-3 sm:px-3.5 py-2 rounded-full text-xs font-bold flex items-center justify-center gap-1 transition-colors shrink-0 touch-manipulation ${
                     dockTab === 'accessibility'
-                      ? 'bg-stone-800 text-white'
-                      : 'text-stone-600 hover:bg-stone-200/60'
+                      ? 'bg-stone-950 text-white shadow-2xs'
+                      : 'text-stone-900 hover:bg-stone-200/80'
                   }`}
+                  aria-label="Opções de Acessibilidade"
                 >
-                  <Eye className="w-3.5 h-3.5" />
+                  <Eye className="w-4 h-4" />
                 </button>
               </div>
 
@@ -707,9 +708,9 @@ export default function App() {
                   <button
                     type="button"
                     onClick={handleVerifyAnswer}
-                    className="min-h-[36px] px-3.5 sm:px-5 py-1 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm flex items-center gap-1 shadow-sm transition-transform active:scale-95 touch-manipulation"
+                    className="min-h-[48px] px-5 sm:px-6 py-2.5 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm transition-transform active:scale-95 touch-manipulation"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <CheckCircle2 className="w-4 h-4" />
                     <span>Responder</span>
                   </button>
                 )}
@@ -720,11 +721,11 @@ export default function App() {
                     soundController.triggerHaptic('light');
                     setIsDialogueOpen(false);
                   }}
-                  className="w-8 h-8 sm:w-auto min-h-[34px] p-1 sm:px-2 rounded-full bg-white hover:bg-stone-100 border border-stone-200 text-stone-600 text-xs font-medium flex items-center justify-center gap-0.5 touch-manipulation"
+                  className="w-11 h-11 sm:w-auto min-h-[44px] sm:min-h-[48px] p-2 sm:px-3 rounded-full bg-white hover:bg-stone-100 border border-stone-300 text-stone-900 text-xs font-bold flex items-center justify-center gap-1 touch-manipulation shadow-2xs"
                   title="Recolher Painel (H)"
                   aria-label="Minimizar painel de frações"
                 >
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-5 h-5" />
                 </button>
               </div>
             </div>
@@ -752,14 +753,14 @@ export default function App() {
               {dockTab === 'creative' && (
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-2">
                   {unlockedRewards.length === 0 ? (
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs sm:text-sm text-stone-700 font-medium">
                       Acerte os desafios dos personagens para ganhar flores, pontes e cristais para decorar o jardim!
                     </p>
                   ) : (
                     <>
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-semibold text-stone-600">
-                          Toque na grama 3D para plantar:
+                        <span className="text-xs sm:text-sm font-bold text-stone-800">
+                          Toque no caminho botânico para plantar:
                         </span>
                         {unlockedRewards.map((reward) => {
                           const isSelected =
@@ -769,10 +770,10 @@ export default function App() {
                               key={reward.id}
                               type="button"
                               onClick={() => setSelectedRewardId(reward.id)}
-                              className={`min-h-[38px] px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all ${
+                              className={`min-h-[48px] px-4 py-2 rounded-full text-xs sm:text-sm font-bold border transition-all ${
                                 isSelected
-                                  ? 'bg-amber-400 border-amber-500 text-stone-950 shadow-xs'
-                                  : 'bg-[#FAF6F0] border-stone-200 text-stone-700 hover:bg-stone-100'
+                                  ? 'bg-amber-800 border-amber-900 text-white shadow-xs'
+                                  : 'bg-[#FAF6F0] border-stone-300 text-stone-900 hover:bg-stone-100'
                               }`}
                             >
                               ✨ {reward.name}
@@ -785,9 +786,9 @@ export default function App() {
                         <button
                           type="button"
                           onClick={handleClearDecorations}
-                          className="px-3 py-1.5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-medium flex items-center gap-1.5"
+                          className="min-h-[48px] px-4 py-2 rounded-full bg-rose-50 hover:bg-rose-100 border border-rose-300 text-rose-900 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-2xs"
                         >
-                          <Trash2 className="w-3.5 h-3.5" />
+                          <Trash2 className="w-4 h-4" />
                           <span>Limpar ({progress.placedDecorations.length})</span>
                         </button>
                       )}
@@ -797,7 +798,7 @@ export default function App() {
               )}
 
               {dockTab === 'accessibility' && (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-1">
                   {[
                     {
                       key: 'voiceEnabled' as const,
@@ -822,14 +823,14 @@ export default function App() {
                         key={item.key}
                         type="button"
                         onClick={() => handleToggleAccessibility(item.key)}
-                        className={`p-3 rounded-2xl border text-left transition-colors flex items-center justify-between ${
+                        className={`p-3.5 min-h-[48px] rounded-2xl border text-left transition-colors flex items-center justify-between shadow-2xs ${
                           active
-                            ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                            : 'bg-[#FAF6F0] border-stone-200 text-stone-600'
+                            ? 'bg-emerald-50 border-emerald-500 text-emerald-950 font-bold'
+                            : 'bg-[#FAF6F0] border-stone-300 text-stone-900 font-bold'
                         }`}
                       >
-                        <span className="text-xs font-bold">{item.label}</span>
-                        <span className="font-mono-num text-[11px] font-bold">
+                        <span className="text-xs sm:text-sm font-bold">{item.label}</span>
+                        <span className={`font-mono-num text-xs font-black px-2 py-0.5 rounded-full ${active ? 'bg-emerald-800 text-white' : 'bg-stone-200 text-stone-900'}`}>
                           {active ? 'ON' : 'OFF'}
                         </span>
                       </button>

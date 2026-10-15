@@ -241,11 +241,11 @@ export const WorldSpeechBubbles: React.FC<WorldSpeechBubblesProps> = ({
                         size="sm"
                       />
                       <div className="min-w-0">
-                        <span className="inline-flex items-center gap-1 font-mono-num text-[11px] font-bold text-rose-500">
-                          <Compass className="w-3.5 h-3.5" />
+                        <span className="inline-flex items-center gap-1 font-mono-num text-xs font-extrabold text-rose-800">
+                          <Compass className="w-4 h-4" />
                           {currentTour.badge}
                         </span>
-                        <div className="font-display font-bold text-sm text-stone-800 truncate">
+                        <div className="font-display font-bold text-sm sm:text-base text-stone-900 truncate">
                           {currentTour.title}
                         </div>
                       </div>
@@ -256,42 +256,42 @@ export const WorldSpeechBubbles: React.FC<WorldSpeechBubblesProps> = ({
                       onClick={() =>
                         onSpeakText(`${currentTour.title}. ${currentTour.text}`)
                       }
-                      className="w-9 h-9 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 flex items-center justify-center transition-colors shrink-0"
+                      className="min-w-[48px] min-h-[48px] rounded-full bg-rose-50 hover:bg-rose-100 text-rose-800 flex items-center justify-center transition-colors shrink-0 shadow-2xs"
                       title="Ouvir"
                       aria-label="Ouvir dica do tour"
                     >
-                      <Volume2 className="w-4 h-4" />
+                      <Volume2 className="w-5 h-5 text-rose-800" />
                     </button>
                   </div>
 
                   {/* Exemplo Visual Ilustrado de cada passo do Tour */}
                   <div className="mb-2.5 p-2 rounded-2xl bg-[#FAF6F0] border border-stone-200/80 flex items-center gap-3">
                     {tourStep === 1 && (
-                      <div className="flex items-center gap-2 px-2 py-1 rounded-xl bg-white border border-stone-200 text-xs font-bold text-stone-700 shrink-0">
+                      <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-white border border-stone-300 text-xs font-bold text-stone-800 shrink-0">
                         <span>🔄 360°</span>
-                        <span className="text-stone-300">|</span>
+                        <span className="text-stone-400">|</span>
                         <span>👆 Toque</span>
                       </div>
                     )}
                     {tourStep === 2 && (
                       <div className="flex items-center gap-1 shrink-0">
-                        <div className="w-7 h-6 rounded-l-md bg-emerald-400 border border-emerald-600 flex items-center justify-center font-mono-num text-[10px] font-bold text-white">
+                        <div className="w-8 h-7 rounded-l-md bg-emerald-700 border border-emerald-800 flex items-center justify-center font-mono-num text-[11px] font-bold text-white">
                           1/2
                         </div>
-                        <div className="w-7 h-6 rounded-r-md bg-stone-100 border border-stone-300 flex items-center justify-center font-mono-num text-[10px] text-stone-500">
+                        <div className="w-8 h-7 rounded-r-md bg-stone-100 border border-stone-400 flex items-center justify-center font-mono-num text-[11px] font-bold text-stone-800">
                           1/2
                         </div>
                       </div>
                     )}
                     {tourStep === 3 && (
-                      <div className="flex items-center gap-1.5 px-2 py-1 rounded-xl bg-white border border-emerald-300 font-mono-num text-xs font-bold text-emerald-700 shrink-0">
+                      <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white border border-emerald-500 font-mono-num text-xs font-black text-emerald-900 shrink-0">
                         <span>0</span>
                         <span>──●──</span>
                         <span>1</span>
                       </div>
                     )}
                     <p
-                      className={`leading-snug text-stone-700 ${
+                      className={`leading-snug text-stone-800 font-medium ${
                         largeText ? 'text-sm' : 'text-xs'
                       }`}
                     >
@@ -302,16 +302,16 @@ export const WorldSpeechBubbles: React.FC<WorldSpeechBubblesProps> = ({
                   {/* Rodapé enxuto do Tour */}
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <div className="flex items-center gap-1" aria-hidden="true">
+                      <div className="flex items-center gap-1.5" aria-hidden="true">
                         {[1, 2, 3].map((s) => (
                           <span
                             key={s}
-                            className={`h-1.5 rounded-full transition-all ${
+                            className={`h-2 rounded-full transition-all ${
                               tourStep === s
-                                ? 'w-5 bg-rose-400'
+                                ? 'w-5 bg-rose-800'
                                 : s < tourStep
-                                ? 'w-2 bg-emerald-400'
-                                : 'w-2 bg-stone-300'
+                                ? 'w-2.5 bg-emerald-800'
+                                : 'w-2.5 bg-stone-400'
                             }`}
                           />
                         ))}
@@ -319,7 +319,7 @@ export const WorldSpeechBubbles: React.FC<WorldSpeechBubblesProps> = ({
                       <button
                         type="button"
                         onClick={onSkipTour}
-                        className="text-[11px] text-stone-400 hover:text-stone-600 underline px-1"
+                        className="min-h-[48px] px-2.5 inline-flex items-center text-xs font-bold text-stone-700 hover:text-stone-950 underline"
                       >
                         Pular
                       </button>
@@ -328,7 +328,7 @@ export const WorldSpeechBubbles: React.FC<WorldSpeechBubblesProps> = ({
                     <button
                       type="button"
                       onClick={onAdvanceTour}
-                      className="min-h-[36px] px-4 py-1.5 rounded-full bg-rose-400 hover:bg-rose-500 text-white font-bold text-xs flex items-center gap-1 shadow-sm transition-transform active:scale-95"
+                      className="min-h-[48px] px-5 py-2.5 rounded-full bg-rose-800 hover:bg-rose-900 text-white font-bold text-sm flex items-center gap-1 shadow-sm transition-transform active:scale-95"
                     >
                       <span>{currentTour.ctaLabel}</span>
                     </button>
@@ -421,28 +421,28 @@ export const WorldSpeechBubbles: React.FC<WorldSpeechBubblesProps> = ({
                             : `${mission.characterName}: ${mission.storyPrompt}`
                         )
                       }
-                      className="w-9 h-9 rounded-full bg-[#FAF6F0] hover:bg-stone-200/70 text-stone-600 flex items-center justify-center transition-colors shrink-0"
+                      className="min-w-[48px] min-h-[48px] rounded-full bg-[#FAF6F0] hover:bg-stone-200 text-emerald-800 flex items-center justify-center transition-colors shrink-0 shadow-2xs"
                       title="Ouvir personagem"
                       aria-label="Ouvir fala do personagem"
                     >
-                      <Volume2 className="w-4 h-4 text-emerald-600" />
+                      <Volume2 className="w-5 h-5 text-emerald-800" />
                     </button>
                   </div>
 
                   {/* Quando acerta: botão rápido para próximo personagem */}
                   {feedback && feedback.isCorrect && (
-                    <div className="mt-2 pt-2 border-t border-stone-200/70 flex items-center justify-between gap-2">
-                      <span className="text-[11px] font-medium text-emerald-700 flex items-center gap-1">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                    <div className="mt-2.5 pt-2.5 border-t border-stone-300 flex items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-emerald-900 flex items-center gap-1">
+                        <Sparkles className="w-4 h-4 text-amber-700" />
                         <span>+{mission.rewardItem.name}</span>
                       </span>
                       <button
                         type="button"
                         onClick={onNextMission}
-                        className="px-3 py-1 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1 shadow-xs transition-transform active:scale-95"
+                        className="min-h-[48px] px-5 py-2 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-xs transition-transform active:scale-95"
                       >
                         <span>Próximo</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
+                        <ChevronRight className="w-4 h-4" />
                       </button>
                     </div>
                   )}
@@ -453,15 +453,15 @@ export const WorldSpeechBubbles: React.FC<WorldSpeechBubblesProps> = ({
                     className={`absolute left-1/2 -bottom-2 -translate-x-1/2 w-3.5 h-3.5 rotate-45 bg-[#FFFDF9] border-r-2 border-b-2 ${
                       feedback
                         ? feedback.isCorrect
-                          ? 'border-emerald-400'
-                          : 'border-amber-300'
-                        : 'border-stone-200/95'
+                          ? 'border-emerald-600'
+                          : 'border-amber-500'
+                        : 'border-stone-300'
                     }`}
                     aria-hidden="true"
                   />
                 </motion.div>
               ) : (
-                /* PÍLULA COMPACTA CLEAN GIRL ACIMA DOS DEMAIS GUARDIÕES */
+                /* PÍLULA COMPACTA CLEAN GIRL ACIMA DOS DEMAIS GUARDIÕES COM TOUCH >= 48px */
                 <motion.button
                   key={`compact-bubble-${mission.id}`}
                   type="button"
@@ -474,12 +474,12 @@ export const WorldSpeechBubbles: React.FC<WorldSpeechBubblesProps> = ({
                     reducedStimuli ? { opacity: 0 } : { opacity: 0, scale: 0.88 }
                   }
                   transition={{ duration: 0.16 }}
-                  className={`group relative px-2.5 py-1.5 rounded-full border shadow-md flex items-center gap-1.5 transition-transform active:scale-95 ${
+                  className={`group relative min-h-[48px] px-3.5 py-2 rounded-full border shadow-md flex items-center gap-2 transition-transform active:scale-95 ${
                     isCompleted
-                      ? 'bg-[#FFFDF9]/95 border-emerald-300 text-stone-700'
+                      ? 'bg-[#FFFDF9] border-emerald-500 text-stone-900'
                       : isNearby
-                      ? 'bg-[#FFFDF9] border-rose-300 text-stone-800 scale-105'
-                      : 'bg-[#FFFDF9]/90 border-stone-200/90 text-stone-700 hover:border-stone-300'
+                      ? 'bg-[#FFFDF9] border-rose-400 text-stone-950 ring-2 ring-rose-200 scale-105'
+                      : 'bg-[#FFFDF9] border-stone-300 text-stone-900 hover:border-stone-400'
                   }`}
                   aria-label={`Conversar com ${mission.characterName}: fração 1 sobre ${mission.targetDenominator}`}
                 >
@@ -487,23 +487,23 @@ export const WorldSpeechBubbles: React.FC<WorldSpeechBubblesProps> = ({
                     denominator={mission.targetDenominator}
                     numerator={1}
                     color={mission.accentColor}
-                    size={22}
+                    size={24}
                   />
-                  <span className="font-display font-bold text-xs text-stone-800">
+                  <span className="font-display font-bold text-xs sm:text-sm text-stone-900">
                     {mission.characterName}
                   </span>
                   <span
-                    className="font-mono-num text-[11px] font-bold px-1.5 py-0.5 rounded-full text-white"
+                    className="font-mono-num text-xs font-black px-2 py-0.5 rounded-full text-white"
                     style={{ backgroundColor: mission.accentColor }}
                   >
                     1/{mission.targetDenominator}
                   </span>
                   {isCompleted && (
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-800 shrink-0" />
                   )}
 
                   <span
-                    className="absolute left-1/2 -bottom-1.5 -translate-x-1/2 w-2.5 h-2.5 rotate-45 bg-[#FFFDF9] border-r border-b border-stone-200"
+                    className="absolute left-1/2 -bottom-1.5 -translate-x-1/2 w-2.5 h-2.5 rotate-45 bg-[#FFFDF9] border-r border-b border-stone-300"
                     aria-hidden="true"
                   />
                 </motion.button>

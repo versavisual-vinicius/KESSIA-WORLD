@@ -54,12 +54,12 @@ export const EducatorModal: React.FC<EducatorModalProps> = ({
         {/* Cabeçalho */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200 bg-[#FAF6F0]">
           <div className="flex items-center gap-3">
-            <BookOpen className="w-5 h-5 text-emerald-600" />
+            <BookOpen className="w-6 h-6 text-emerald-800" />
             <div>
-              <h2 id="educator-modal-title" className="text-base sm:text-lg font-bold text-stone-800">
+              <h2 id="educator-modal-title" className="text-base sm:text-lg font-bold text-stone-900">
                 Painel do Educador · BNCC EF04MA09
               </h2>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-stone-700 font-semibold">
                 Frações unitárias (1/2 a 1/10) na reta numérica.
               </p>
             </div>
@@ -68,32 +68,32 @@ export const EducatorModal: React.FC<EducatorModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="w-9 h-9 rounded-full bg-white hover:bg-stone-100 border border-stone-200 text-stone-600 flex items-center justify-center"
+            className="min-w-[48px] min-h-[48px] rounded-full bg-white hover:bg-stone-100 border border-stone-300 text-stone-800 flex items-center justify-center transition-colors shadow-2xs"
             aria-label="Fechar Painel do Educador"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Corpo rolável */}
         <div className="p-5 sm:p-6 overflow-y-auto space-y-5">
           {/* Barra de Progresso Geral BNCC */}
-          <div className="p-4 rounded-2xl bg-[#FAF6F0] border border-stone-200/80 space-y-2">
+          <div className="p-4 rounded-2xl bg-[#FAF6F0] border border-stone-300 space-y-2">
             <div className="flex items-center justify-between text-xs font-bold">
-              <span className="text-stone-700">Progresso Geral na Trilha (BNCC EF04MA09)</span>
-              <span className="font-mono-num text-emerald-700">
+              <span className="text-stone-900">Progresso Geral na Trilha (BNCC EF04MA09)</span>
+              <span className="font-mono-num text-emerald-950 font-black">
                 {Math.round((progress.completedMissionIds.length / MISSIONS.length) * 100)}%
               </span>
             </div>
             <div
-              className="w-full h-3 rounded-full bg-stone-200 overflow-hidden"
+              className="w-full h-3.5 rounded-full bg-stone-300 overflow-hidden"
               role="progressbar"
               aria-valuenow={progress.completedMissionIds.length}
               aria-valuemin={0}
               aria-valuemax={MISSIONS.length}
             >
               <div
-                className="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-300"
+                className="h-full bg-emerald-800 rounded-full transition-all duration-300"
                 style={{
                   width: `${(progress.completedMissionIds.length / MISSIONS.length) * 100}%`,
                 }}
@@ -103,27 +103,27 @@ export const EducatorModal: React.FC<EducatorModalProps> = ({
 
           {/* Resumo Quantitativo */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="p-3.5 rounded-2xl bg-[#FAF6F0] border border-stone-200/80">
-              <div className="text-xs text-stone-500">Concluídas</div>
-              <div className="mt-1 text-xl font-bold font-mono-num text-emerald-600">
+            <div className="p-3.5 rounded-2xl bg-[#FAF6F0] border border-stone-300">
+              <div className="text-xs text-stone-700 font-bold">Concluídas</div>
+              <div className="mt-1 text-xl font-black font-mono-num text-emerald-900">
                 {progress.completedMissionIds.length} / {MISSIONS.length}
               </div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#FAF6F0] border border-stone-200/80">
-              <div className="text-xs text-stone-500">Tentativas</div>
-              <div className="mt-1 text-xl font-bold font-mono-num text-stone-800">
+            <div className="p-3.5 rounded-2xl bg-[#FAF6F0] border border-stone-300">
+              <div className="text-xs text-stone-700 font-bold">Tentativas</div>
+              <div className="mt-1 text-xl font-black font-mono-num text-stone-900">
                 {diagnostics.totalAttempts}
               </div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#FAF6F0] border border-stone-200/80">
-              <div className="text-xs text-stone-500">Taxa de Acerto</div>
-              <div className="mt-1 text-xl font-bold font-mono-num text-rose-500">
+            <div className="p-3.5 rounded-2xl bg-[#FAF6F0] border border-stone-300">
+              <div className="text-xs text-stone-700 font-bold">Taxa de Acerto</div>
+              <div className="mt-1 text-xl font-black font-mono-num text-rose-800">
                 {diagnostics.accuracyRate}%
               </div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#FAF6F0] border border-stone-200/80">
-              <div className="text-xs text-stone-500">Traços vs. Partes</div>
-              <div className="mt-1 text-xl font-bold font-mono-num text-amber-600">
+            <div className="p-3.5 rounded-2xl bg-[#FAF6F0] border border-stone-300">
+              <div className="text-xs text-stone-700 font-bold">Traços vs. Partes</div>
+              <div className="mt-1 text-xl font-black font-mono-num text-amber-800">
                 {diagnostics.tickConfusionCount}
               </div>
             </div>
@@ -184,29 +184,29 @@ export const EducatorModal: React.FC<EducatorModalProps> = ({
         </div>
 
         {/* Rodapé */}
-        <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3.5 border-t border-stone-200 bg-[#FAF6F0]">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-t border-stone-200 bg-[#FAF6F0]">
           <button
             type="button"
             onClick={onResetProgress}
-            className="px-3.5 py-2 rounded-full bg-white hover:bg-rose-50 border border-stone-200 text-stone-600 hover:text-rose-600 text-xs font-medium flex items-center gap-1.5 transition-colors"
+            className="min-h-[48px] px-4 py-2.5 rounded-full bg-white hover:bg-rose-50 border border-stone-300 text-stone-800 hover:text-rose-900 text-xs sm:text-sm font-bold flex items-center gap-2 transition-colors shadow-2xs"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-4 h-4 text-rose-700" />
             <span>Reiniciar Progresso</span>
           </button>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <button
               type="button"
               onClick={handleExportReport}
-              className="px-3.5 py-2 rounded-full bg-white hover:bg-stone-100 border border-stone-200 text-stone-700 text-xs font-medium flex items-center gap-1.5 transition-colors"
+              className="min-h-[48px] px-4 py-2.5 rounded-full bg-white hover:bg-stone-100 border border-stone-300 text-stone-800 text-xs sm:text-sm font-bold flex items-center gap-2 transition-colors shadow-2xs"
             >
-              <Download className="w-3.5 h-3.5 text-emerald-600" />
+              <Download className="w-4 h-4 text-emerald-800" />
               <span>Exportar JSON</span>
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold transition-colors"
+              className="min-h-[48px] px-6 py-2.5 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-bold transition-colors shadow-xs"
             >
               Fechar
             </button>

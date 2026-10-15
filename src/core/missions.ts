@@ -22,7 +22,7 @@ export const MISSIONS: MissionStation[] = [
     targetNumerator: 1,
     position3D: [-4.2, 0, 2.8],
     npcOffset3D: [-3.1, 0, 3.4],
-    accentColor: '#10b981',
+    accentColor: '#047857',
     rewardItem: {
       id: 'reward-wooden-arch',
       name: 'Arco Florido',
@@ -52,7 +52,7 @@ export const MISSIONS: MissionStation[] = [
     targetNumerator: 1,
     position3D: [4.0, 0, 2.6],
     npcOffset3D: [3.0, 0, 3.3],
-    accentColor: '#0ea5e9',
+    accentColor: '#0369a1',
     rewardItem: {
       id: 'reward-glowing-fern',
       name: 'Flor de Três Pétalas',
@@ -82,7 +82,7 @@ export const MISSIONS: MissionStation[] = [
     targetNumerator: 1,
     position3D: [-4.6, 0, -2.2],
     npcOffset3D: [-3.5, 0, -1.6],
-    accentColor: '#f59e0b',
+    accentColor: '#b45309',
     rewardItem: {
       id: 'reward-solar-lantern',
       name: 'Lanterna Dourada',
@@ -112,7 +112,7 @@ export const MISSIONS: MissionStation[] = [
     targetNumerator: 1,
     position3D: [4.5, 0, -2.4],
     npcOffset3D: [3.4, 0, -1.7],
-    accentColor: '#ec4899',
+    accentColor: '#be185d',
     rewardItem: {
       id: 'reward-water-fountain',
       name: 'Fonte Cristal',
@@ -142,7 +142,7 @@ export const MISSIONS: MissionStation[] = [
     targetNumerator: 1,
     position3D: [0, 0, -4.6],
     npcOffset3D: [1.1, 0, -3.7],
-    accentColor: '#a855f7',
+    accentColor: '#7e22ce',
     rewardItem: {
       id: 'reward-amethyst-cluster',
       name: 'Quartzo Lavanda',
@@ -172,7 +172,7 @@ export const MISSIONS: MissionStation[] = [
     targetNumerator: 1,
     position3D: [0, 0, 0.2],
     npcOffset3D: [-1.15, 0, 0.85],
-    accentColor: '#eab308',
+    accentColor: '#92400e',
     rewardItem: {
       id: 'reward-sundial-monument',
       name: 'Relógio Dourado',

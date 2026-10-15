@@ -107,13 +107,13 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
       >
         <div className="flex items-center justify-between gap-1.5 px-0.5">
           <div className="flex items-center gap-1.5">
-            <span className="w-5 h-5 rounded-full bg-rose-100 text-rose-600 font-mono-num text-[11px] font-bold flex items-center justify-center shrink-0">
+            <span className="w-6 h-6 rounded-full bg-rose-100 text-rose-950 font-mono-num text-xs font-extrabold flex items-center justify-center shrink-0">
               1
             </span>
             <span
-              className={`font-semibold ${
-                highContrast ? 'text-stone-950' : 'text-stone-700'
-              } ${largeText ? 'text-sm' : 'text-xs'}`}
+              className={`font-bold ${
+                highContrast ? 'text-stone-950' : 'text-stone-900'
+              } ${largeText ? 'text-base' : 'text-xs sm:text-sm'}`}
             >
               Dividir em partes iguais:
             </span>
@@ -121,17 +121,17 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
 
           {/* Crachá visual compacto da fração atual + Ouvir */}
           <div className="flex items-center gap-1.5">
-            <div className="px-2 py-1 rounded-xl bg-white border border-stone-200 flex items-center gap-1.5 shadow-2xs">
+            <div className="px-2.5 py-1 rounded-xl bg-white border border-stone-300 flex items-center gap-1.5 shadow-2xs">
               <MiniFractionPie
                 denominator={chosenDenominator}
                 numerator={chosenStep}
-                color={chosenStep === 1 ? '#10b981' : '#f43f5e'}
-                size={20}
+                color={chosenStep === 1 ? '#047857' : '#be185d'}
+                size={22}
               />
-              <span className="font-mono-num font-extrabold text-emerald-700 text-xs sm:text-sm">
+              <span className="font-mono-num font-black text-emerald-900 text-sm sm:text-base">
                 {chosenStep === 0 ? '0' : `${chosenStep}/${chosenDenominator}`}
               </span>
-              <span className="text-[11px] text-stone-500 hidden md:inline">
+              <span className="text-xs text-stone-700 hidden md:inline font-semibold">
                 ({currentSpoken})
               </span>
             </div>
@@ -147,16 +147,16 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
                   }.`
                 )
               }
-              className="w-8 h-8 rounded-xl bg-white hover:bg-stone-100 border border-stone-200 text-stone-600 flex items-center justify-center transition-colors shrink-0 shadow-2xs"
+              className="min-w-[48px] min-h-[48px] rounded-xl bg-white hover:bg-stone-100 border border-stone-300 text-stone-800 flex items-center justify-center transition-colors shrink-0 shadow-2xs"
               title="Ouvir fração"
               aria-label="Ouvir leitura da fração"
             >
-              <Volume2 className="w-3.5 h-3.5 text-emerald-600" />
+              <Volume2 className="w-5 h-5 text-emerald-800" />
             </button>
           </div>
         </div>
 
-        {/* Grade de 7 botões perfeita para 360px (Moto G34 5G) */}
+        {/* Grade de 7 botões perfeita para 360px (Moto G34 5G) com altura >= 48px */}
         <div
           className="grid grid-cols-7 gap-1 sm:gap-1.5 w-full"
           role="group"
@@ -169,20 +169,20 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
                 key={den}
                 type="button"
                 onClick={() => onChangeDenominator(den)}
-                className={`min-h-[44px] py-1 px-0.5 rounded-xl font-mono-num font-bold transition-all flex flex-col items-center justify-center gap-0.5 border touch-manipulation ${
+                className={`min-h-[48px] py-1 px-0.5 rounded-xl font-mono-num font-bold transition-all flex flex-col items-center justify-center gap-0.5 border touch-manipulation ${
                   isSelected
-                    ? 'bg-white border-emerald-500 text-emerald-700 shadow-xs scale-[1.02]'
-                    : 'bg-[#FFFDF9] border-stone-200 text-stone-600 hover:bg-white active:bg-stone-100'
+                    ? 'bg-white border-emerald-800 text-emerald-950 ring-2 ring-emerald-300 shadow-xs scale-[1.02]'
+                    : 'bg-[#FFFDF9] border-stone-300 text-stone-900 hover:bg-white active:bg-stone-100'
                 }`}
                 aria-pressed={isSelected}
               >
                 <MiniFractionPie
                   denominator={den}
                   numerator={1}
-                  color={isSelected ? '#10b981' : '#f43f5e'}
+                  color={isSelected ? '#047857' : '#be185d'}
                   size={18}
                 />
-                <span className="text-[11px] leading-none">{den}</span>
+                <span className="text-xs sm:text-sm font-black leading-none">{den}</span>
               </button>
             );
           })}
@@ -197,9 +197,9 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
             : 'bg-[#FAF6F0]/90 border border-stone-200/80'
         }`}
       >
-        {/* Barra de fatias clicáveis (altura 40px no mobile para toque ágil) */}
+        {/* Barra de fatias clicáveis (altura mínima 48px para toque acessível) */}
         <div
-          className="grid w-full h-9 sm:h-10 rounded-xl overflow-hidden border border-stone-300 bg-white shadow-2xs"
+          className="grid w-full h-12 min-h-[48px] rounded-xl overflow-hidden border border-stone-300 bg-white shadow-2xs"
           style={{
             gridTemplateColumns: `repeat(${chosenDenominator}, minmax(0, 1fr))`,
           }}
@@ -213,12 +213,12 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
                 key={partIdx}
                 type="button"
                 onClick={() => onChangeStep(stepNumber)}
-                className={`h-full flex items-center justify-center border-r last:border-r-0 border-stone-200 font-mono-num text-[11px] sm:text-xs font-bold transition-colors touch-manipulation ${
+                className={`h-full min-h-[48px] flex items-center justify-center border-r last:border-r-0 border-stone-300 font-mono-num text-xs sm:text-sm font-bold transition-colors touch-manipulation ${
                   isFilled
                     ? isFirstUnitPart
-                      ? 'bg-emerald-400 text-white'
-                      : 'bg-rose-300 text-stone-900'
-                    : 'bg-[#FFFDF9] text-stone-400 hover:bg-stone-100 active:bg-stone-200'
+                    ? 'bg-emerald-800 text-white font-extrabold'
+                    : 'bg-rose-800 text-white font-extrabold'
+                    : 'bg-[#FFFDF9] text-stone-800 hover:bg-stone-100 active:bg-stone-200'
                 }`}
                 aria-label={`Parte ${stepNumber} de ${chosenDenominator}`}
               >
@@ -232,8 +232,8 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
         {isReviewMode && onChangeCompareDenominator && (
           <div className="space-y-1.5 pt-0.5">
             <div className="flex flex-wrap items-center justify-between gap-1 text-xs">
-              <div className="flex items-center gap-1 flex-wrap">
-                <span className="text-rose-500 font-bold text-[11px]">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-rose-800 font-black text-xs sm:text-sm">
                   Comparar:
                 </span>
                 {ALLOWED_DENOMINATORS.map((den) => (
@@ -241,23 +241,23 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
                     key={den}
                     type="button"
                     onClick={() => onChangeCompareDenominator(den)}
-                    className={`min-h-[32px] px-2 py-0.5 rounded-full font-mono-num text-[11px] font-bold transition-colors border touch-manipulation ${
+                    className={`min-h-[48px] px-3.5 py-1.5 rounded-full font-mono-num text-xs sm:text-sm font-bold transition-colors border touch-manipulation ${
                       compareDenominator === den
-                        ? 'bg-rose-400 border-rose-500 text-white'
-                        : 'bg-white border-stone-200 text-stone-600 hover:bg-stone-100'
+                        ? 'bg-rose-800 border-rose-900 text-white shadow-xs'
+                        : 'bg-white border-stone-300 text-stone-900 hover:bg-stone-100'
                     }`}
                   >
                     1/{den}
                   </button>
                 ))}
               </div>
-              <span className="text-stone-600 text-[11px] font-medium leading-tight">
+              <span className="text-stone-800 text-xs sm:text-sm font-bold leading-tight">
                 {compareUnitFractions(chosenDenominator, compareDenominator)}
               </span>
             </div>
 
             <div
-              className="grid w-full h-7 rounded-lg overflow-hidden border border-stone-300 bg-white"
+              className="grid w-full h-10 min-h-[40px] rounded-lg overflow-hidden border border-stone-300 bg-white"
               style={{
                 gridTemplateColumns: `repeat(${compareDenominator}, minmax(0, 1fr))`,
               }}
@@ -265,10 +265,10 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
               {Array.from({ length: compareDenominator }, (_, idx) => (
                 <div
                   key={idx}
-                  className={`h-full flex items-center justify-center border-r last:border-r-0 border-stone-200 font-mono-num text-[10px] font-bold ${
+                  className={`h-full flex items-center justify-center border-r last:border-r-0 border-stone-300 font-mono-num text-xs font-bold ${
                     idx === 0
-                      ? 'bg-rose-300 text-stone-900'
-                      : 'bg-[#FFFDF9] text-stone-400'
+                      ? 'bg-rose-800 text-white font-extrabold'
+                      : 'bg-[#FFFDF9] text-stone-800'
                   }`}
                 >
                   1/{compareDenominator}
@@ -280,14 +280,14 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
 
         {/* PASSO 2: Reta Numérica [0, 1] com Arco Visual de Salto */}
         <div className="space-y-1">
-          <div className="flex items-center justify-between text-[11px] text-stone-500 px-0.5">
-            <span className="inline-flex items-center gap-1 font-semibold text-stone-700">
-              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-mono-num text-[11px] font-bold flex items-center justify-center">
+          <div className="flex items-center justify-between text-xs px-0.5">
+            <span className="inline-flex items-center gap-1.5 font-bold text-stone-900 text-xs sm:text-sm">
+              <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-950 font-mono-num text-xs font-black flex items-center justify-center">
                 2
               </span>
               Arraste na reta:
             </span>
-            <span className="font-mono-num text-emerald-700 font-bold">
+            <span className="font-mono-num text-emerald-900 font-black text-xs sm:text-sm">
               1ª marca = 1/{chosenDenominator}
             </span>
           </div>
@@ -306,7 +306,7 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
             onPointerMove={handlePointerMoveTrack}
             onPointerUp={handlePointerUpTrack}
             onPointerCancel={handlePointerUpTrack}
-            className="relative h-15 sm:h-17 px-4 sm:px-6 rounded-xl bg-white border border-stone-200 select-none flex items-center touch-none cursor-pointer"
+            className="relative min-h-[72px] h-18 sm:h-20 px-4 sm:px-6 rounded-2xl bg-white border border-stone-300 select-none flex items-center touch-none cursor-pointer"
           >
             {/* Arco SVG de Salto mostrando o intervalo a partir do 0 */}
             {chosenStep > 0 && (
@@ -319,30 +319,30 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
                 <path
                   d={`M 0 22 Q ${markerPercent / 2} 2 ${markerPercent} 22`}
                   fill="none"
-                  stroke={chosenStep === 1 ? '#10b981' : '#f43f5e'}
-                  strokeWidth="2"
+                  stroke={chosenStep === 1 ? '#047857' : '#be185d'}
+                  strokeWidth="2.5"
                   strokeDasharray="3 2"
                 />
               </svg>
             )}
 
             {/* Eixo Principal [0, 1] */}
-            <div className="relative w-full h-2 rounded-full bg-stone-200">
+            <div className="relative w-full h-2.5 rounded-full bg-stone-300">
               <div
                 className={`absolute left-0 top-0 bottom-0 rounded-full transition-all duration-150 ${
-                  chosenStep === 1 ? 'bg-emerald-400' : 'bg-rose-400'
+                  chosenStep === 1 ? 'bg-emerald-800' : 'bg-rose-800'
                 }`}
                 style={{ width: `${markerPercent}%` }}
               />
 
-              {/* Marcas da Reta com Prevenção de Colisão no Moto G34 */}
+              {/* Marcas da Reta com Prevenção de Colisão no Moto G34 e Touch >= 48px */}
               {ticks.map((tickIdx) => {
                 const leftPercent = (tickIdx / chosenDenominator) * 100;
                 const isSelected = tickIdx === chosenStep;
                 const isUnitTarget = tickIdx === 1;
                 const isEndpoint = tickIdx === 0 || tickIdx === chosenDenominator;
 
-                // Em telas mobile, se o denominador for 6, 8 ou 10, exibe rótulo de texto apenas nos pontos-chave (0, 1, selecionado e 1/N) para não colidir
+                // Em telas mobile, se o denominador for 6, 8 ou 10, exibe rótulo de texto apenas nos pontos-chave para não colidir
                 const shouldShowLabel =
                   chosenDenominator <= 4 ||
                   isEndpoint ||
@@ -358,7 +358,7 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
                       onChangeStep(tickIdx);
                     }}
                     style={{ left: `${leftPercent}%` }}
-                    className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-13 flex flex-col items-center justify-center group focus:outline-none touch-manipulation"
+                    className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[44px] sm:min-w-[48px] min-h-[48px] h-14 flex flex-col items-center justify-center group focus:outline-none touch-manipulation"
                     aria-label={
                       tickIdx === 0
                         ? 'Zero'
@@ -368,12 +368,12 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
                     }
                   >
                     <span
-                      className={`w-1 rounded-full transition-all ${
+                      className={`rounded-full transition-all ${
                         isEndpoint
-                          ? 'h-5 bg-stone-700'
+                          ? 'h-6 w-1.5 bg-stone-950'
                           : isUnitTarget
-                          ? 'h-4 bg-emerald-500'
-                          : 'h-3 bg-stone-400'
+                          ? 'h-5 w-1.5 bg-emerald-800'
+                          : 'h-3.5 w-1 bg-stone-500'
                       }`}
                     />
 
@@ -381,8 +381,8 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
                     <span
                       className={`mt-0.5 rounded-full transition-all flex items-center justify-center font-mono-num font-bold ${
                         isSelected
-                          ? 'w-5.5 h-5.5 bg-emerald-500 text-white ring-3 ring-emerald-200 shadow-xs text-[10px]'
-                          : 'w-2 h-2 bg-stone-300 group-hover:bg-stone-400'
+                          ? 'w-6 h-6 bg-emerald-800 text-white ring-4 ring-emerald-300 shadow-sm text-xs font-black'
+                          : 'w-2.5 h-2.5 bg-stone-400 group-hover:bg-stone-600'
                       }`}
                     >
                       {isSelected ? '●' : ''}
@@ -393,10 +393,10 @@ export const NumberLineVisualizer: React.FC<NumberLineVisualizerProps> = ({
                       <span
                         className={`mt-0.5 font-mono-num leading-none whitespace-nowrap ${
                           isEndpoint
-                            ? 'text-[11px] font-extrabold text-stone-800'
+                            ? 'text-xs font-black text-stone-950 bg-white px-1 rounded shadow-2xs'
                             : isSelected || isUnitTarget
-                            ? 'text-[10px] font-bold text-emerald-700'
-                            : 'text-[9px] text-stone-400'
+                            ? 'text-[11px] sm:text-xs font-black text-emerald-950 bg-emerald-100 px-1 py-0.5 rounded border border-emerald-300 shadow-2xs'
+                            : 'text-[10px] font-bold text-stone-700 bg-white/90 px-0.5 rounded'
                         }`}
                       >
                         {tickIdx === 0

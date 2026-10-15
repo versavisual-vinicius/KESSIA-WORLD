@@ -246,18 +246,18 @@ export const ContinuousWorld2D: React.FC<ContinuousWorld2DProps> = ({
           <div className="relative mx-auto w-[calc(100%-120px)] h-20 rounded-3xl bg-[#FAF6F0] border-2 border-stone-300 shadow-md flex items-center px-6">
             
             {/* Subdivisões ativas da barra fracionária desenhadas na trilha */}
-            <div className="absolute inset-x-6 top-2 bottom-2 rounded-2xl overflow-hidden flex pointer-events-none opacity-85">
+            <div className="absolute inset-x-6 top-2 bottom-2 rounded-2xl overflow-hidden flex pointer-events-none opacity-95">
               {divisionIntervals.map((idx) => {
                 const isSelected = idx + 1 <= chosenStep;
                 return (
                   <div
                     key={idx}
-                    className={`h-full border-r last:border-r-0 border-stone-300/80 transition-colors flex items-center justify-center font-mono-num font-bold text-xs ${
+                    className={`h-full border-r last:border-r-0 border-stone-400/70 transition-colors flex items-center justify-center font-mono-num font-black text-xs ${
                       isSelected
                         ? idx === 0
-                          ? 'bg-emerald-300/60 text-emerald-900'
-                          : 'bg-rose-200/60 text-rose-900'
-                        : 'bg-white/40 text-stone-500'
+                          ? 'bg-emerald-300 text-emerald-950'
+                          : 'bg-rose-200 text-rose-950'
+                        : 'bg-white/80 text-stone-900'
                     }`}
                     style={{ width: `${100 / chosenDenominator}%` }}
                   >
@@ -278,8 +278,8 @@ export const ContinuousWorld2D: React.FC<ContinuousWorld2DProps> = ({
                     className="absolute -translate-x-1/2 flex flex-col items-center"
                     style={{ left: `${percent}%` }}
                   >
-                    <span className="w-1 h-3 bg-stone-500 rounded-full" />
-                    <span className={`text-[11px] font-mono-num px-1.5 py-0.5 rounded-full bg-white/90 shadow-2xs ${isEndpoint ? 'text-stone-900 font-black' : 'text-emerald-700 font-bold'}`}>
+                    <span className="w-1.5 h-3 bg-stone-700 rounded-full" />
+                    <span className={`text-[11px] font-mono-num px-2 py-0.5 rounded-full bg-white border border-stone-300 shadow-2xs ${isEndpoint ? 'text-stone-950 font-black' : 'text-emerald-900 font-extrabold'}`}>
                       {stepIdx === 0 ? '0' : stepIdx === chosenDenominator ? '1' : `${stepIdx}/${chosenDenominator}`}
                     </span>
                   </div>
@@ -299,7 +299,7 @@ export const ContinuousWorld2D: React.FC<ContinuousWorld2DProps> = ({
                 <span className="w-1.5 h-6 bg-[#8c5a2c] rounded-full" />
                 <span className="w-1.5 h-6 bg-[#8c5a2c] rounded-full" />
               </div>
-              <span className="mt-1 px-2 py-0.5 rounded-full bg-emerald-600 text-white font-mono-num font-bold text-[10px] shadow-xs">
+              <span className="mt-1 px-3 py-1 rounded-full bg-emerald-800 text-white font-mono-num font-extrabold text-xs shadow-xs">
                 Ponte (1/2)
               </span>
             </div>
@@ -319,29 +319,30 @@ export const ContinuousWorld2D: React.FC<ContinuousWorld2DProps> = ({
                     e.stopPropagation();
                     onSelectMission(m.id);
                   }}
-                  className={`absolute -top-16 -translate-x-1/2 flex flex-col items-center group transition-transform active:scale-95 ${
+                  className={`absolute -top-16 -translate-x-1/2 min-w-[48px] min-h-[48px] flex flex-col items-center justify-center group transition-transform active:scale-95 ${
                     isActive ? 'scale-110 z-20' : 'hover:scale-105 z-10'
                   }`}
                   style={{ left: `calc(1.5rem + ${percent}% * (100% - 3rem) / 100)` }}
+                  aria-label={`${m.title} - Fração 1/${m.targetDenominator}`}
                 >
                   {/* Balão de Chamada da Estação */}
                   <div
-                    className={`px-2.5 py-1 rounded-2xl shadow-sm text-xs font-bold whitespace-nowrap flex items-center gap-1.5 border transition-all ${
+                    className={`px-3 py-1.5 rounded-2xl shadow-sm text-xs font-bold whitespace-nowrap flex items-center gap-1.5 border transition-all ${
                       isActive
-                        ? 'bg-emerald-500 text-white border-emerald-600 shadow-md ring-2 ring-emerald-200'
+                        ? 'bg-emerald-800 text-white border-emerald-900 shadow-md ring-2 ring-emerald-300'
                         : isCompleted
-                        ? 'bg-white text-emerald-800 border-emerald-300'
-                        : 'bg-white text-stone-700 border-stone-200'
+                        ? 'bg-white text-emerald-900 border-emerald-500'
+                        : 'bg-white text-stone-900 border-stone-300'
                     }`}
                   >
                     <span>{m.title}</span>
-                    <span className="px-1.5 py-0.2 rounded-full bg-black/10 text-[10px] font-mono-num font-extrabold">
+                    <span className="px-1.5 py-0.5 rounded-full bg-black/10 text-[11px] font-mono-num font-black">
                       1/{m.targetDenominator}
                     </span>
                   </div>
 
                   {/* Marco Visual no Solo */}
-                  <div className="w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-200 mt-1 shadow-sm flex items-center justify-center text-white text-[9px] font-bold">
+                  <div className="w-4 h-4 rounded-full bg-emerald-700 ring-4 ring-emerald-300 mt-1 shadow-sm flex items-center justify-center text-white text-[9px] font-bold">
                     {isCompleted ? '✓' : '●'}
                   </div>
                 </button>

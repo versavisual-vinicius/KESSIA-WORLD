@@ -13,6 +13,10 @@
 
 - [x] Experiência 100% tátil (touch-first) para mobile: D-pad ergonômico de polegar (44px), tap-to-move no solo, fatias com toque suave e scrubbing contínuo do slider com `setPointerCapture`; teclado restrito a fallback secundário invisível em background.
 - [x] Transição para Mundo Contínuo 2D (`ContinuousWorld2D.tsx`): Kessia integrada organicamente ao cenário botânico; o chão do mundo é a própria reta numérica graduada de 0 a 1; ponte em 1/2 sobre o riacho; eliminação de 575kB de WebGL/Three.js.
+- [x] Auditoria de Acessibilidade & Responsividade (WCAG AA):
+  - Viewport atualizado com `maximum-scale=5.0` permitindo ampliação e zoom assistivo.
+  - Alvos de toque (touch targets) expandidos para $\ge 48\times 48\text{px}$ em todos os controles interativos (botões de voz, denominadores, fatias da barra, réguas, abas e diálogos).
+  - Contraste de cores elevado para padrão WCAG AA ($\ge 4.5:1$): botões de ação principal em `emerald-800` (>5.5:1), crachás de missão e ponte em `emerald-800`, indicadores de progresso e métricas com contraste aprimorado.
 
 ## Próximos Passos & Melhorias
 - [ ] PWA offline support e manifest para instalação direta em tablets e smartphones escolares.
